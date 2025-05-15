@@ -1,0 +1,76 @@
+## 2025/05/13
+
+- CI: automated building and testing of code when changes are pushed
+    - Detects conflicts/bugs
+    - maintains a single source of truth
+    - linting!
+- CD (delivery): Every code change that passes all tests is automatically prepared for release, though often with manual approval
+    - environment management (dev, staging, production)
+    - deployment strategies
+        - blue/green: two versions, green one is active, blue one is on standby incase something happens
+        - canary: deployed to subset of users. if issues detected, roll out to more
+        - rolling: rolled out to a few servers at a time
+    - Feature toggles
+        - features deployed but toggled by configuration so they can be quickly disabled if needed
+    - tree-trunk-based development
+        - short-lived feature branches and merged into main branch (the trunk) daily. more manageable changes
+- CD (deploy): if a business is confident in delivery's reliability, they may deploy automatically to production if it passes CI
+
+### paradigms:
+- GitOps: uses Git as single source of truth
+    - simple audit trail
+    - works well with Kubernetes and cloud-native arch
+    - requires strong git practices
+    - bottlenecks with large monorepos. git operations slower with larger repos
+- Progressive Delivery: extends CD with incremental releases (feature flags, canary deployments, A/B testing)
+    - tech debt from outdated feature flags
+    - more complex testing
+    - can test in prod with real users (A/B)
+    - supports more experimentation
+- Value Stream Delivery: optimize workflow for customer value 
+    - map out entire delivery process, always maximizing customer value
+- DevSecOps: security integrated in development lifecycle rather than separate
+    - requires security expertise across teams
+    - can slow down pipelines if not optimized
+    - can be resource intensive
+- Waterfall development: traditional handoffs
+
+## 2025/05/14
+
+- popular tools
+    - Jenkins
+        - open-source
+        - self-hosted
+            - you install it on your own servers and self manage
+        - automation server
+            - builds code automatically and triggers actions
+        - best for large orgs needing complete control over CI/CD
+        - highly customizable
+        - FREE
+        - steep learning curve
+    - GitHub Actions
+        - native GItHub CI/CD and tightly integrated with it
+        - YAML configuration
+            - YAML does everything JSON does (and more)
+        - free for public, paid for private
+        - best for open-source projects and SMALL PROJECTS
+    - GitLab CI
+        - GitLab has more complete DevOps platform that GitHub
+        - container based workflows
+        - STARTUPS
+    - CircleCI
+        - YAML based config. they all use YAML
+        - supports macOS and Linux well
+        - best for cloud native apps and containerized workflows
+        - STRONG CONTAINER SUPPORT
+    - Travis CI
+        - simple
+- Docker and containerization's role
+    - package applications with dependencies
+    - isolate apps from each other
+    - ensure consistent build environments
+    - no more "it works on my machine"
+- role of Infrastructure as Code (Terraform, Ansible)
+    - using code to handle infrastructure rather than manual configuration
+    - might create aws servers with code
+- deploying code with IaC 
