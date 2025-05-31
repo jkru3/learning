@@ -1,0 +1,36 @@
+## 2025/05/18
+### 12 factor app
+- **I. Codebase**: One codebase tracked in revision control, many deploys
+    - git
+    - multiple apps sharing the same code is a violation of the 12 factor app
+- **II. Dependencies**: Explicitly declare and isolate dependencies
+    - `requirements.txt`
+    - can't assume dependencies will exist on an app you are working on
+    - virtual environment (venv)
+        - this does NOT account for tools dependent on system outside of lang (e.g. curl)
+        - docker can use tools outside of Python's capabilities
+- **III. Config**: Store config in the environment
+    - you might store hosts to get a backing service as ENV
+    - dev, test, prod
+- **IV. Backing services**: Treat backing services as attached resources
+    - no matter what backing service we use, we should be able to point to any instance and it should just work
+- **V. Build, release, run**: Strictly separate build and run stages
+    - dev phase first
+- **VI. Processes**: Execute the app as one or more stateless processes
+    - "sticky sessions" -- load balancers that redirect users to a particular server
+        - they are a VIOLATION of 12 factor
+    - all session info must be stored as backing service in a db
+- **VII. Port binding**: Export services via port binding
+    - completely self contained
+- **VIII. Concurrency**: Scale out via the process model
+    - load balancer helps with this
+    - processes are a first class citizen, so we want to scale out horizontally, not vertically
+- **IX. Disposability**: Maximize robustness with fast startup and graceful shutdown
+    - provision additional instances at a moments notice (seconds)
+    - apps should shut down gracefully when a SIGTERM (polite process kill) is received
+- **X. Dev/prod parity**: Keep development, staging, and production as similar as possible
+    - use same tech in everything if possible
+- **XI. Logs**: Treat logs as event streams
+    - do not concern app with storage and routing, just stream it
+- **XII. Admin processes**: Run admin/management tasks as one-off processes 
+    - should be automated, scalable, and reproducable. exact same as non-admin processes
