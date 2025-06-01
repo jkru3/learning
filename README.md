@@ -11,4 +11,5 @@ these notes are purely for my own learning of technical subjects. They are organ
 - if i'm drawing out notes, i'll make a `drawings/` directory
     - i use Excelcidraw
     - drawings will be referred linked by respective `TIL.md`
+- if there are interesting illustrations to include, i'll make a `images/` directory
 
