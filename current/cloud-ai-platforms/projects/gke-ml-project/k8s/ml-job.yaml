@@ -1,0 +1,31 @@
+# ml-job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: simple-ml-training-job
+spec:
+  template:
+    spec:
+      # serviceAccountName: default # If you need specific permissions, define a service account
+      containers:
+      - name: ml-trainer
+        image: us-central1-docker.pkg.dev/YOUR_PROJECT_ID/ml-training-repo/simple-ml-job:v1 # IMPORTANT: Replace YOUR_PROJECT_ID
+        resources:
+          requests:
+            cpu: "500m" # Request 0.5 CPU core
+            memory: "512Mi" # Request 512 MB memory
+          limits:
+            cpu: "1" # Limit to 1 CPU core
+            memory: "1Gi" # Limit to 1 GB memory
+          # --- SIMULATING GPU REQUEST ---
+          # Uncomment the following lines to simulate a GPU request.
+          # Note: This will cause the pod to remain in 'Pending' state
+          # if your cluster doesn't have actual GPU nodes with available GPUs.
+          # This is part of the learning!
+          # nvidia.com/gpu: 1 # Request 1 GPU
+        env:
+          - name: GKE_PROJECT_ID
+            # value: "YOUR_PROJECT_ID" # REPLACE WITH ENV
+      restartPolicy: OnFailure # Important for Jobs: retry on failure, but not indefinitely
+  backoffLimit: 3 # Max retries
+  activeDeadlineSeconds: 3600 # Max job duration (1 hour)
