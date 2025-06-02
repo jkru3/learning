@@ -30,4 +30,10 @@ GCP's general purpose black-box optimization service. Define parameters for *any
 ## Google Compute Engine
 - provides the hardware for the applications to run on
 - are the hosts for docker containers
+
 ---
+# 2025/06/01
+- GKE handles 'hands-off' node scaling when HPA scales pods if there are not enough nodes to run the new ones
+- 1:1 relationship between a Kubernetes node and a VM in GKE Autopilot
+- regionally set cluster (rather than zone set cluster) control plane is distributed accross wider region and thus has higher availability
+- GKE automatically ingests cloud logging
