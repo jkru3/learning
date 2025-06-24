@@ -18,3 +18,5 @@ configuration variables for a model
 can tune these, ideally with bayesian optimization
 
 ---
+
+what you get after training is a .pkl file for scikit-learn, .pb file for tensorflow, or .pt file for PyTorch
